@@ -1,0 +1,101 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+annotate view Z_B_LIBROS_A05 with
+{
+  @UI : {
+  facet: [{
+      id: 'DetallesLibro',
+      position: 10,
+      type    : #COLLECTION,
+      label: 'Detalles del Libro'
+  }, {
+      id: 'Libro',
+      parentId : 'DetallesLibro',
+      position: 10,
+      type    : #FIELDGROUP_REFERENCE,
+      label: 'Detalles',
+      targetQualifier: 'DetallesLibro'
+  }, {
+      id: 'Compradores',
+      position: 30,
+      type    : #LINEITEM_REFERENCE,
+      label: 'Compradores',
+      targetElement: '_Clientes'
+  }],
+  fieldGroup: [{ qualifier: 'DetallesLibro',
+                 position : 10}]}
+  IdLibro;
+
+  @UI : {
+    lineItem: [{ position : 10,
+                 importance: #HIGH }],
+    selectionField: [{ position: 10 }]
+  }
+  Titulo;
+
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.9
+  @Search.ranking: #HIGH
+  @UI : { selectionField: [{ position: 40 }]
+  }
+  Editorial;
+
+  @UI : {
+    lineItem: [{ position : 10,
+                 importance: #HIGH }]
+  }
+  Autor;
+
+  @Consumption.valueHelpDefinition: [{entity : {name    : 'Z_B_CATEGO_A05',
+                                                element : 'Descripcion'} }]
+  @UI : {
+  fieldGroup: [{ qualifier: 'DetallesLibro',
+                 position : 20}],
+  selectionField: [{ position: 40 }]
+  }
+  Categoria;
+
+  @UI : {
+    lineItem: [{ position : 30,
+                 importance: #HIGH }]
+  }
+  Formato;
+
+  @UI : {
+    lineItem: [{ position : 40,
+                 importance: #HIGH }]
+  }
+  Idioma;
+
+  @UI : {
+    lineItem: [{ position : 50,
+                 importance: #HIGH }]
+  }
+  Paginas;
+
+  @UI : {
+    lineItem: [{ position : 60,
+                 importance: #HIGH }]
+  }
+  Precio;
+
+  @UI : {
+    lineItem: [{ position    : 70,
+                 importance  : #HIGH,
+                 value : 'Text',
+                 criticality : 'Ventas'}]
+  }
+  Ventas;
+
+  @UI : {
+    lineItem: [{ qualifier: 'DetallesLibro',
+                 position: 30 }]
+  }
+  Descripcion;
+
+  @UI : {
+    lineItem: [{ position : 80,
+                 importance: #HIGH }]
+  }
+  _Clientes;
+}
